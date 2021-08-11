@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -36,8 +37,12 @@ fun PhotographerCard() {
 
     Row {
 
-        Surface(modifier = Modifier.size(50.dp), shape = CircleShape, color = MaterialTheme
-            .colors.onSecondary.copy(alpha = 0.2F)){}
+        Surface(
+            modifier = Modifier.padding(8.dp).size(50.dp),
+            shape = CircleShape,
+            color = MaterialTheme
+                .colors.onSecondary.copy(alpha = 0.2F)
+        ) {}
 
 
         Column {
