@@ -3,6 +3,7 @@ package com.uxstate.matcomponents
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,9 +15,13 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.uxstate.matcomponents.ui.theme.MatComponentsTheme
 
@@ -38,8 +43,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun PhotographerCard() {
 
-    Row (modifier = Modifier.padding(1.dp).clip(RectangleShape).background
-        (MaterialTheme.colors.surface).clickable {  }.padding(16.dp)){
+    Row(modifier = Modifier
+        .padding(1.dp)
+        .clip(RectangleShape)
+        .background
+            (MaterialTheme.colors.surface)
+        .clickable { }
+        .padding(16.dp)) {
 
         Surface(
             modifier = Modifier.size(50.dp),
@@ -49,7 +59,11 @@ fun PhotographerCard() {
         ) {}
 
 
-        Column(modifier= Modifier.padding(start = 8.dp).align(Alignment.CenterVertically)) {
+        Column(
+            modifier = Modifier
+                .padding(start = 8.dp)
+                .align(Alignment.CenterVertically)
+        ) {
 
 
             Text(text = "Alfred Sisley", fontWeight = FontWeight.Bold)
@@ -69,7 +83,12 @@ fun PhotographerCard() {
 @Composable
 fun DefaultPreview() {
     MatComponentsTheme {
-        PhotographerCard()
+
+        Column {
+
+
+            LayoutsCodelab()
+        }
     }
 
 
@@ -78,5 +97,29 @@ fun DefaultPreview() {
 
 @Composable
 fun LayoutsCodelab() {
-    Text(text = "Hi there!")
+
+    Scaffold(topBar = {
+
+        Text("GOAT", style = MaterialTheme.typography.h3)
+
+    }) {
+
+        //wrapping content in Scaffold
+            padding ->
+        BodyContent(modifier = Modifier.padding(padding))
+    }
 }
+
+//content Composable
+@Composable
+fun BodyContent(modifier: Modifier = Modifier) {
+
+    Column(modifier = modifier) {
+        Text(text = "Hi there!")
+    }
+}
+
+
+
+
+
