@@ -10,8 +10,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.sharp.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,7 +37,9 @@ class MainActivity : ComponentActivity() {
             MatComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
+
                     PhotographerCard()
+                    LayoutsCodelab()
                 }
             }
         }
@@ -97,12 +104,29 @@ fun DefaultPreview() {
 
 @Composable
 fun LayoutsCodelab() {
+    val selectedItem = remember { mutableStateOf("call") }
+    Scaffold(bottomBar = {
 
-    Scaffold(topBar = {
+        BottomAppBar() {
 
-        Text("GOAT", style = MaterialTheme.typography.h3)
+            BottomNavigationItem(selected = selectedItem.value == "message",
+                                 onClick = { /*TODO*/ },
+                                 label = { Text(text = "Message") },
+                                 icon = {
+                                     Icon(imageVector = Icons.Filled.Call, null)
+                                 })
 
-    }) {
+            BottomNavigationItem(onClick = { /*TODO*/ },
+                                 selected = selectedItem.value == "message",
+                                 label = { Text("Call") },
+                                 icon = {
+                                     Icon(imageVector = Icons.Filled.Chat, null)
+                                 })
+        }
+    }
+    )
+
+    {
 
         //wrapping content in Scaffold
             padding ->
@@ -110,14 +134,18 @@ fun LayoutsCodelab() {
     }
 }
 
+
 //content Composable
 @Composable
 fun BodyContent(modifier: Modifier = Modifier) {
 
-    Column(modifier = modifier) {
+    Column(modifier = modifier.padding(5.dp)) {
         Text(text = "Hi there!")
     }
 }
+
+
+
 
 
 
