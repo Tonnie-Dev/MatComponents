@@ -3,9 +3,7 @@ package com.uxstate.matcomponents
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,13 +48,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SimpleList() {
 
-    Column {
+    /* We save the scrolling position with this state that can also
+         be used to programmatically scroll the list*/
 
-        repeat(100)
-        { index ->
+    val scrollState = rememberScrollState()
 
-            Text(text = "This is GOAT ${index + 1}")
+    Column(modifier = Modifier.verticalScroll(state = scrollState ))
+    {
+        repeat(500) {
 
+            Text(text = "GOAT ${it + 1}")
         }
     }
 
