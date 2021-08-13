@@ -38,10 +38,26 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
 
-                   
+                    SimpleList()
                 }
             }
         }
     }
+
 }
 
+
+@Composable
+fun SimpleList() {
+
+    Column {
+
+        repeat(100)
+        { index ->
+
+            Text(text = "This is GOAT ${index + 1}")
+
+        }
+    }
+
+}
