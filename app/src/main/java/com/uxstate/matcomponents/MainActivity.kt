@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -48,16 +50,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SimpleList() {
 
-    /* We save the scrolling position with this state that can also
-         be used to programmatically scroll the list*/
+    val state = rememberLazyListState()
 
-    val scrollState = rememberScrollState()
+    LazyColumn(state = state){
 
-    Column(modifier = Modifier.verticalScroll(state = scrollState ))
-    {
-        repeat(500) {
+        items(522){
 
-            Text(text = "GOAT ${it + 1}")
+
+            Text(text = "G.O.A.T #${it+1}")
         }
     }
 
