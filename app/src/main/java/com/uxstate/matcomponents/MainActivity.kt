@@ -38,26 +38,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
 
-                    SimpleList()
+
                 }
             }
-        }
-    }
-
-}
-
-
-@Composable
-fun SimpleList() {
-
-    val state = rememberLazyListState()
-
-    LazyColumn(state = state){
-
-        items(522){
-
-
-            Text(text = "G.O.A.T #${it+1}")
         }
     }
 
