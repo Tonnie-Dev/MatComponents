@@ -5,10 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
-import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import com.uxstate.matcomponents.ui.theme.MatComponentsTheme
 
 
@@ -19,7 +24,7 @@ class MainActivity : ComponentActivity() {
             MatComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-
+                    ImagesList()
 
                 }
             }
@@ -27,14 +32,38 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    @Composable
-    fun ImageList() {
-Row(verticalAlignment = Alignment.CenterVertically){
-
-   // val painter = rememberImagePainter()
-   // Image(painter = , contentDescription = )
 }
+
+@Composable
+fun AndroidLogo(index: Int) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+
+        val painter =
+            rememberImagePainter(
+                data = "https://developer.android.com/images/brand/Android_Robot.png"
+            )
+        Image(
+            painter = painter,
+            contentDescription = "Android Logo",
+            modifier = Modifier.size(50.dp)
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(text = "Item #$index")
+    }
+}
+
+@Composable
+fun ImagesList() {
+    val state = rememberLazyListState()
+    LazyColumn(state = state) {
+
+
+        items(100) {
+
+            AndroidLogo(it)
+        }
+
 
     }
-
 }
+
