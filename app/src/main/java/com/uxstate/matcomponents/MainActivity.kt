@@ -38,17 +38,22 @@ class MainActivity : ComponentActivity() {
 fun AndroidLogo(index: Int) {
     Row(verticalAlignment = Alignment.CenterVertically) {
 
+        //download image using coil
         val painter =
             rememberImagePainter(
                 data = "https://developer.android.com/images/brand/Android_Robot.png"
             )
+        //pass the image to Painter
         Image(
             painter = painter,
             contentDescription = "Android Logo",
             modifier = Modifier.size(50.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
-        Text(text = "Item #$index")
+        Text(
+            text = "Item #$index",
+            style = MaterialTheme.typography.subtitle1
+        )
     }
 }
 
