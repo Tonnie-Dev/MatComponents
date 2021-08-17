@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -35,6 +36,42 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun ImagesList() {
+    val state = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
+    Column() {
+
+
+    Row(horizontalArrangement =Arrangement.spacedBy(12.dp)){
+
+
+        Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(8.dp)) {
+            Text(text = "Scroll to the Top")
+        }
+
+        Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(8.dp)) {
+            Text(text = "Scroll to End")
+        }
+    }
+
+
+
+    LazyColumn(state = state) {
+
+
+        items(100) {
+
+            AndroidLogo(it)
+        }
+
+
+    }
+
+    }
+}
+
+@Composable
 fun AndroidLogo(index: Int) {
     Row(verticalAlignment = Alignment.CenterVertically) {
 
@@ -57,18 +94,5 @@ fun AndroidLogo(index: Int) {
     }
 }
 
-@Composable
-fun ImagesList() {
-    val state = rememberLazyListState()
-    LazyColumn(state = state) {
 
-
-        items(100) {
-
-            AndroidLogo(it)
-        }
-
-
-    }
-}
 
