@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.uxstate.matcomponents.ui.theme.MatComponentsTheme
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -39,6 +40,7 @@ class MainActivity : ComponentActivity() {
 fun ImagesList() {
     val state = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
+    val numberOfListItems = 100
 
     Column() {
 
@@ -46,12 +48,22 @@ fun ImagesList() {
     Row(horizontalArrangement =Arrangement.spacedBy(12.dp)){
 
 
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(8.dp)) {
+        Button(onClick = { coroutineScope.launch {
+            state.animateScrollToItem(0)
+
+        }}, modifier = Modifier.padding(8.dp)) {
             Text(text = "Scroll to the Top")
         }
 
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(8.dp)) {
-            Text(text = "Scroll to End")
+        Button(onClick = {
+coroutineScope.launch { 
+
+
+    state.animateScrollToItem(numberOfListItems-1)
+}
+
+        }, modifier = Modifier.padding(8.dp)) {
+            Text(text = "Scroll to the End")
         }
     }
 
@@ -60,7 +72,7 @@ fun ImagesList() {
     LazyColumn(state = state) {
 
 
-        items(100) {
+        items(numberOfListItems) {
 
             AndroidLogo(it)
         }
