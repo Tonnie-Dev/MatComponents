@@ -38,47 +38,49 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ImagesList() {
-    val state = rememberLazyListState()
-    val coroutineScope = rememberCoroutineScope()
-    val numberOfListItems = 100
+
 
     Column() {
 
 
-    Row(horizontalArrangement =Arrangement.spacedBy(12.dp)){
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            val numberOfListItems = 100
+            //we save the scrolling position with this state
+            val state = rememberLazyListState()
 
+            //we save the coroutine scope where our animated scroll will be executed
+            val coroutineScope = rememberCoroutineScope()
 
-        Button(onClick = { coroutineScope.launch {
-            state.animateScrollToItem(0)
+            Button(onClick = {
+                coroutineScope.launch {
+                    state.animateScrollToItem(0)
+                }
+            }, modifier = Modifier.padding(8.dp)) {
+                Text(text = "Scroll to the Top")
+            }
 
-        }}, modifier = Modifier.padding(8.dp)) {
-            Text(text = "Scroll to the Top")
-        }
+            Button(onClick = {
+                coroutineScope.launch {
+                    state.animateScrollToItem(numberOfListItems - 1)
+                }
 
-        Button(onClick = {
-coroutineScope.launch { 
-
-
-    state.animateScrollToItem(numberOfListItems-1)
-}
-
-        }, modifier = Modifier.padding(8.dp)) {
-            Text(text = "Scroll to the End")
-        }
-    }
-
-
-
-    LazyColumn(state = state) {
-
-
-        items(numberOfListItems) {
-
-            AndroidLogo(it)
+            }, modifier = Modifier.padding(8.dp)) {
+                Text(text = "Scroll to the End")
+            }
         }
 
 
-    }
+
+        LazyColumn(state = state) {
+
+
+            items(numberOfListItems) {
+
+                AndroidLogo(it)
+            }
+
+
+        }
 
     }
 }
