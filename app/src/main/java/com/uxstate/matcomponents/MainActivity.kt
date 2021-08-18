@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.uxstate.matcomponents.ui.theme.MatComponentsTheme
@@ -42,16 +43,19 @@ fun ImagesList() {
 
     Column() {
 
+        val numberOfListItems = 100
+        //we save the scrolling position with this state
+        val state = rememberLazyListState()
 
+        /*we save the coroutine scope where our animated
+        scroll will be executed*/
+        val coroutineScope = rememberCoroutineScope()
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            val numberOfListItems = 100
-            //we save the scrolling position with this state
-            val state = rememberLazyListState()
 
-            //we save the coroutine scope where our animated scroll will be executed
-            val coroutineScope = rememberCoroutineScope()
 
             Button(onClick = {
+
+                //launching Coroutine
                 coroutineScope.launch {
                     state.animateScrollToItem(0)
                 }
@@ -106,6 +110,20 @@ fun AndroidLogo(index: Int) {
             style = MaterialTheme.typography.subtitle1
         )
     }
+}
+
+@Preview
+@Composable
+fun MyPreview() {
+
+    MatComponentsTheme {
+        // A surface container using the 'background' color from the theme
+        Surface(color = MaterialTheme.colors.background) {
+            ImagesList()
+
+        }
+    }
+
 }
 
 
